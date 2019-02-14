@@ -9,7 +9,7 @@ const requestProducts = createAction(types.LOAD_PRODUCTS_REQUEST);
 const ProductsOnSuccess = createAction(types.LOAD_PRODUCTS_SUCCESS);
 const productsOnFailure = createAction(types.LOAD_PRODUCTS_FAILURE);
 
-const fetchCategories = () => async (dispatch, getState) => {
+const fetchProducts = () => async (dispatch, getState) => {
   const { products } = getState();
   if (products.isCached) {
     return products.data;
@@ -17,7 +17,7 @@ const fetchCategories = () => async (dispatch, getState) => {
 
   dispatch(requestProducts());
   try {
-    const response = await axios.get('https://api.gousto.co.uk/products/v2.0/categories');
+    const response = await axios.get('https://api.gousto.co.uk/products/v2.0/products?includes[]=categories&includes[]=attributes&sort=position&image_sizes[]=365&i%20mage_sizes[]=400&period_id=120%20For%20cross%20origin%20accessibility%20please');
     const normalizedData = normalizeProducts(response.data.data);
     dispatch(ProductsOnSuccess(normalizedData));
     return normalizedData;
@@ -28,5 +28,5 @@ const fetchCategories = () => async (dispatch, getState) => {
 };
 
 export default {
-  fetchCategories
+  fetchProducts
 };

@@ -32,7 +32,7 @@ describe('fetchProducts', () => {
       products: { isCached: false }
     });
 
-    store.dispatch(actions.fetchCategories()).then(() => {
+    store.dispatch(actions.fetchProducts()).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -50,7 +50,7 @@ describe('fetchProducts', () => {
       products: { isCached: false }
     });
 
-    store.dispatch(actions.fetchCategories()).then(() => {
+    store.dispatch(actions.fetchProducts()).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
@@ -62,7 +62,7 @@ describe('fetchProducts', () => {
       products: { isCached: true }
     });
 
-    store.dispatch(actions.fetchCategories()).then(() => {
+    store.dispatch(actions.fetchProducts()).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
     });
   });
