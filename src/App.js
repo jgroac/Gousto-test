@@ -1,22 +1,13 @@
+import './App.css';
 import React from 'react';
 import { Layout } from 'antd';
-import './App.css';
+import Routes from './config/routes';
 
-import NavigationBar from './shared/components/NavigationBar';
-import Breadcrumbs from './shared/components/Breadcrumbs';
-import SearchBar from './shared/components/SearchBar';
-import MainContent from './shared/components/MainContent';
-
-const App = props => {
+const App = () => {
   return (
-    <React.Fragment>
-      <Layout>
-        <NavigationBar />
-        <Breadcrumbs />
-        <SearchBar />
-        <MainContent />
-      </Layout>
-    </React.Fragment>
+    <Layout>
+      <Routes />
+    </Layout>
   );
 };
 
