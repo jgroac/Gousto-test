@@ -2,7 +2,13 @@ import { handleActions } from 'redux-actions';
 import types from './types';
 
 export const initialState = {
-  data: {},
+  data: {
+    entities: {
+      products: {},
+      categories: {}
+    },
+    result: []
+  },
   isCached: false,
   isFetching: false,
   error: null
