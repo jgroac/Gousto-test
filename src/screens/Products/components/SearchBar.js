@@ -4,9 +4,9 @@ import { Input } from 'antd';
 const { Search } = Input;
 
 const SearchBar = () => (
-  <div style={{ padding: '20px 50px' }}>
+  <div style={{ padding: '20px 0px' }}>
     <Search
-      placeholder="input search text"
+      placeholder="Search Product"
       onSearch={value => console.log(value)}
       style={{ width: 200 }}
     />
