@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions';
-import axios from 'axios';
 import types from './types';
+import service from '../../../shared/util/service';
 
 const requestCategories = createAction(types.LOAD_CATEGORIES_REQUEST);
 const categoriesOnSuccess = createAction(types.LOAD_CATEGORIES_SUCCESS);
@@ -14,7 +14,7 @@ const fetchCategories = () => async (dispatch, getState) => {
 
   dispatch(requestCategories());
   try {
-    const response = await axios.get('https://api.gousto.co.uk/products/v2.0/categories');
+    const response = await service.getCategories();
     dispatch(categoriesOnSuccess(response.data.data));
     return response.data.data;
   } catch (error) {

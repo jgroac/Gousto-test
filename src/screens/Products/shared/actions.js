@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
-import axios from 'axios';
 import types from './types';
 import normalizers from './normalizers';
+import service from '../../../shared/util/service';
 
 const { normalizeProducts } = normalizers;
 
@@ -18,7 +18,7 @@ const fetchProducts = () => async (dispatch, getState) => {
 
   dispatch(requestProducts());
   try {
-    const response = await axios.get('https://api.gousto.co.uk/products/v2.0/products?includes[]=categories&includes[]=attributes&sort=position&image_sizes[]=365&i%20mage_sizes[]=400&period_id=120%20For%20cross%20origin%20accessibility%20please');
+    const response = await service.getProducts();
     const normalizedData = normalizeProducts(response.data.data);
     dispatch(ProductsOnSuccess(normalizedData));
     return normalizedData;
