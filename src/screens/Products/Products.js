@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Layout } from 'antd';
+import { Layout, Empty } from 'antd';
 import Categories from '../Categories';
 import SearchBar from './components/SearchBar';
 import Product from './components/Product';
 import Loader from '../../shared/components/Loader';
+import If from '../../shared/components/If';
 
 class Products extends Component {
   constructor(props) {
@@ -43,13 +44,18 @@ class Products extends Component {
           <SearchBar onChange={searchProduct} searchValue={searchValue} />
           <div style={{ background: '#fff', padding: 24, minHeight: 700 }}>
             <Loader isLoading={isFetching}>
-              {products.map(product => (
-                <Product
-                  product={product}
-                  toggleDetails={this.toggleDetails}
-                  showDetails={!!activeProductMap[product.id]}
-                />
-              ))}
+              <If condition={products.length > 0}>
+                {products.map(product => (
+                  <Product
+                    product={product}
+                    toggleDetails={this.toggleDetails}
+                    showDetails={!!activeProductMap[product.id]}
+                  />
+                ))}
+              </If>
+              <If condition={products.length === 0}>
+                <Empty />
+              </If>
             </Loader>
           </div>
         </Layout.Content>
