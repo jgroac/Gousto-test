@@ -29,7 +29,7 @@ describe('products reducer', () => {
     const payload = 'product request failed';
     const action = { type: types.LOAD_PRODUCTS_FAILURE, payload };
     const nextState = reducer(initialState, action);
-    expect(nextState.isCached).toBe(true);
+    expect(nextState.isCached).toBe(false);
     expect(nextState.isFetching).toBe(false);
     expect(nextState.error).toEqual(payload);
   });
