@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, waitForElement, cleanup } from 'react-testing-library';
+import { render, waitForElement, cleanup, fireEvent } from 'react-testing-library';
 import Products from './Products';
 
 jest.mock('../Categories', () => () => <div />);
@@ -35,5 +35,30 @@ describe('<Products />', () => {
 
     expect(getByText('product1')).toBeTruthy();
     expect(getByText('product2')).toBeTruthy();
+  });
+
+  it('should show product details if the toggle button is clicked', async () => {
+    props.products = [{ title: 'product1', id: 1, description: 'desc' }];
+    props.isFetching = false;
+
+    const { getByLabelText, getByText } = render(<Products {...props} />);
+    const input = getByLabelText('show-product-details');
+
+    fireEvent.click(input);
+
+    expect(getByText('desc')).toBeTruthy();
+  });
+
+  it('should hide product details after click toggle button a second time', async () => {
+    props.products = [{ title: 'product1', id: 1, description: 'desc' }];
+    props.isFetching = false;
+
+    const { getByLabelText, queryByText } = render(<Products {...props} />);
+    const input = getByLabelText('show-product-details');
+
+    fireEvent.click(input);
+    fireEvent.click(input);
+
+    expect(queryByText('desc')).toBeNull();
   });
 });
