@@ -33,4 +33,11 @@ describe('products reducer', () => {
     expect(nextState.isFetching).toBe(false);
     expect(nextState.error).toEqual(payload);
   });
+
+  it('should handle SEARCH_FOR_PRODUCT', () => {
+    const payload = 'product';
+    const action = { type: types.SEARCH_FOR_PRODUCT, payload };
+    const nextState = reducer(initialState, action);
+    expect(nextState.searchTerm).toBe(payload);
+  });
 });

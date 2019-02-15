@@ -10,7 +10,7 @@ class Products extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      detailMap: {}
+      activeProductMap: {}
     };
 
     this.toggleDetails = this.toggleDetails.bind(this);
@@ -22,31 +22,32 @@ class Products extends Component {
   }
 
   toggleDetails(id) {
-    const { detailMap } = this.state;
-    const map = { ...detailMap };
+    const { activeProductMap } = this.state;
+    const map = { ...activeProductMap };
     if (map[id]) {
       map[id] = false;
     } else {
       map[id] = true;
     }
-    this.setState({ detailMap: map });
+    this.setState({ activeProductMap: map });
   }
 
   render() {
-    const { categoryId, products, isFetching } = this.props;
-    const { detailMap } = this.state;
+    const { categoryId, products, isFetching, searchProduct, searchValue } = this.props;
+    const { activeProductMap } = this.state;
+
     return (
       <>
         <Categories categoryId={categoryId} />
         <Layout.Content style={{ padding: '0 50px' }}>
-          <SearchBar />
+          <SearchBar onChange={searchProduct} searchValue={searchValue} />
           <div style={{ background: '#fff', padding: 24, minHeight: 700 }}>
             <Loader isLoading={isFetching}>
               {products.map(product => (
                 <Product
                   product={product}
                   toggleDetails={this.toggleDetails}
-                  showDetails={!!detailMap[product.id]}
+                  showDetails={!!activeProductMap[product.id]}
                 />
               ))}
             </Loader>
@@ -64,6 +65,8 @@ Products.propTypes = {
   }).isRequired,
   isFetching: PropTypes.bool.isRequired,
   fetchProducts: PropTypes.func.isRequired,
+  searchProduct: PropTypes.func.isRequired,
+  searchValue: PropTypes.string.isRequired,
   categoryId: PropTypes.string.isRequired
 };
 

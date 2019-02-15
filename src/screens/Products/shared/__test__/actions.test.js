@@ -67,3 +67,18 @@ describe('fetchProducts', () => {
     });
   });
 });
+
+describe('searchProduct', () => {
+  it('should get the search term and dispatch it', async () => {
+    const value = 'product';
+    const expectedActions = [{ type: types.SEARCH_FOR_PRODUCT, payload: value }];
+
+    const store = mockStore({
+      products: { isCached: false }
+    });
+
+    store.dispatch(actions.searchProduct(value)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+});

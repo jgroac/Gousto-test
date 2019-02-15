@@ -9,6 +9,7 @@ export const initialState = {
     },
     result: []
   },
+  searchTerm: '',
   isCached: false,
   isFetching: false,
   error: null
@@ -34,6 +35,11 @@ reducerMap[types.LOAD_PRODUCTS_FAILURE] = (state, { payload }) => ({
   isCached: false,
   isFetching: false,
   error: payload
+});
+
+reducerMap[types.SEARCH_FOR_PRODUCT] = (state, { payload }) => ({
+  ...state,
+  searchTerm: payload
 });
 
 export default handleActions(reducerMap, initialState);

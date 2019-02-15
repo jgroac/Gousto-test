@@ -8,6 +8,7 @@ const { normalizeProducts } = normalizers;
 const requestProducts = createAction(types.LOAD_PRODUCTS_REQUEST);
 const ProductsOnSuccess = createAction(types.LOAD_PRODUCTS_SUCCESS);
 const productsOnFailure = createAction(types.LOAD_PRODUCTS_FAILURE);
+const searchForProduct = createAction(types.SEARCH_FOR_PRODUCT);
 
 const fetchProducts = () => async (dispatch, getState) => {
   const { products } = getState();
@@ -27,6 +28,12 @@ const fetchProducts = () => async (dispatch, getState) => {
   }
 };
 
+const searchProduct = value => async dispatch => {
+  dispatch(searchForProduct(value));
+  return value;
+};
+
 export default {
-  fetchProducts
+  fetchProducts,
+  searchProduct
 };
