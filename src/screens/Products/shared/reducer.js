@@ -19,7 +19,7 @@ const reducerMap = {};
 reducerMap[types.LOAD_PRODUCTS_REQUEST] = state => ({
   ...state,
   isCached: false,
-  isFetching: true,
+  isFetching: true
 });
 
 reducerMap[types.LOAD_PRODUCTS_SUCCESS] = (state, { payload }) => ({
@@ -31,7 +31,7 @@ reducerMap[types.LOAD_PRODUCTS_SUCCESS] = (state, { payload }) => ({
 
 reducerMap[types.LOAD_PRODUCTS_FAILURE] = (state, { payload }) => ({
   ...state,
-  isCached: true,
+  isCached: false,
   isFetching: false,
   error: payload
 });
