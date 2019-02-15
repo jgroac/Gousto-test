@@ -6,6 +6,8 @@ export const getProductsByCategory = (state, { categoryId }) => {
   return products.filter(product => product.categories.includes(categoryId));
 };
 
+export const getFetchingStatus = ({ products }) => products.isFetching;
+
 export default {
   getProductsByCategory
 };
